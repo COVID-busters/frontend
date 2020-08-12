@@ -8,8 +8,10 @@
 
 /* TODO: 모바일 웹에서 oveflow:hidden 해도 스크롤바 생기는 이슈*/
 /* REF: https://stackoverflow.com/questions/14270084/overflow-xhidden-doesnt-prevent-content-from-overflowing-in-mobile-browsers */
-html {
-  overflow:hidden;
+html, body {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .textbox {
@@ -39,26 +41,25 @@ html {
 /* 
  * wave retrieved from https://codepen.io/rstacruz/pen/oxJqNv
  */
-.wave {
-  opacity: .4;
+.wavebox {
   position: absolute;
-  top: -70vw;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.wave {
+  opacity: .8;
+  position: absolute;
+  top: -60vw;
   left: -25vw;
-  background: #4eace3;
+  background: #5272CE;
   width: 150vw;
   height: 150vw;
   transform-origin: 50% 48%;
   border-radius: 43%;
   animation: drift 5000ms infinite linear;
-}
-
-@media (min-width: 640px) {
-  .wavesize\@s {
-    top: -70vw;
-    left: -25vw;
-    width: 150vw;
-    height: 150vw;
-  }
 }
 
 @media (min-width: 960px) {
@@ -70,22 +71,27 @@ html {
   }
 }
 
-@media (min-width: 1200px) {
-  .wavesize\@l {
-    top: -50vw;
-    width: 100vw;
-    height: 100vw;
-  }
-}
-
 .wave.-two {
   animation: drift 9000ms infinite linear;
   opacity: .1;
-  background: #549ce8;
+  background: #2E2F47;
 }
 
 .wave.-three {
   animation: drift 7000ms infinite linear;
+}
+
+.wavebox:after {
+  content: '';
+  display: block;
+  left:0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /*background-image: linear-gradient(red, yellow, blue);*/
+  background: linear-gradient(to bottom, rgba(78,172,227,1.0), rgba(154,203,226,0.2) 50%, rgba(255,255,255,1));
+  z-index: 11;
+  transform: translate3d(0, 0, 0);
 }
 
 @keyframes drift {
@@ -115,7 +121,7 @@ html {
   display: block;
   width: 225px;
   padding: 15px 0;
-  background-color: #e49d98;
+  background-color: #FF3782;
   box-shadow: 0 5px 10px rgba(0,0,0,.1);
   color: #fff;
   font-family: 'Nanum Gothic', sans-serif;
