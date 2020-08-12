@@ -1,0 +1,222 @@
+/*
+ * font-family: 'Nanum Gothic', sans-serif;
+ */
+* {
+  font-family: 'Jua', sans-serif;
+  font-weight: 400;
+}
+
+/* TODO: 모바일 웹에서 oveflow:hidden 해도 스크롤바 생기는 이슈*/
+/* REF: https://stackoverflow.com/questions/14270084/overflow-xhidden-doesnt-prevent-content-from-overflowing-in-mobile-browsers */
+html {
+  overflow:hidden;
+}
+
+.textbox {
+  width: 100%;
+  z-index: 1;
+  line-height: 100px;
+  text-align: center;
+  transform: translate3d(0, 0, 0);
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Jua', sans-serif;
+  letter-spacing: .1em;
+  font-size: 20px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  text-indent: .3em;
+}
+
+.title {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  text-indent: .3em;
+  font-family: 'Jua', sans-serif;
+  letter-spacing: .2em;
+  font-size: 40px;
+}
+
+/* 
+ * wave retrieved from https://codepen.io/rstacruz/pen/oxJqNv
+ */
+.wave {
+  opacity: .4;
+  position: absolute;
+  top: -70vw;
+  left: -25vw;
+  background: #4eace3;
+  width: 150vw;
+  height: 150vw;
+  transform-origin: 50% 48%;
+  border-radius: 43%;
+  animation: drift 5000ms infinite linear;
+}
+
+@media (min-width: 640px) {
+  .wavesize\@s {
+    top: -70vw;
+    left: -25vw;
+    width: 150vw;
+    height: 150vw;
+  }
+}
+
+@media (min-width: 960px) {
+  .wavesize\@m {
+    top: -75vw;
+    left: -10vw;
+    width: 120vw;
+    height: 120vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wavesize\@l {
+    top: -50vw;
+    width: 100vw;
+    height: 100vw;
+  }
+}
+
+.wave.-two {
+  animation: drift 9000ms infinite linear;
+  opacity: .1;
+  background: #549ce8;
+}
+
+.wave.-three {
+  animation: drift 7000ms infinite linear;
+}
+
+@keyframes drift {
+  from { transform: rotate(0deg); }
+  from { transform: rotate(360deg); }
+}
+
+/* 
+ * ribbon retrieved from https://codepen.io/nxworld/pen/oLdoWb
+ */
+.ribbon {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+}
+.ribbon::before,
+.ribbon::after {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  display: block;
+  border: 5px solid #dc7a74;
+}
+.ribbon span {
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 15px 0;
+  background-color: #e49d98;
+  box-shadow: 0 5px 10px rgba(0,0,0,.1);
+  color: #fff;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 800;
+  text-shadow: 0 1px 1px rgba(0,0,0,.2);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* top left*/
+.ribbon-top-left {
+  top: -10px;
+  left: -10px;
+}
+.ribbon-top-left::before,
+.ribbon-top-left::after {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+.ribbon-top-left::before {
+  top: 0;
+  right: 0;
+}
+.ribbon-top-left::after {
+  bottom: 0;
+  left: 0;
+}
+.ribbon-top-left span {
+  right: -25px;
+  top: 30px;
+  transform: rotate(-45deg);
+}
+
+/* top right*/
+.ribbon-top-right {
+  top: -20px;
+  right: -20px;
+}
+.ribbon-top-right::before,
+.ribbon-top-right::after {
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+.ribbon-top-right::before {
+  top: 0;
+  left: 0;
+}
+.ribbon-top-right::after {
+  bottom: 0;
+  right: 0;
+}
+.ribbon-top-right span {
+  left: -25px;
+  top: 30px;
+  transform: rotate(45deg);
+}
+
+/* bottom left*/
+.ribbon-bottom-left {
+  bottom: -20px;
+  left: -20px;
+}
+.ribbon-bottom-left::before,
+.ribbon-bottom-left::after {
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+.ribbon-bottom-left::before {
+  bottom: 0;
+  right: 0;
+}
+.ribbon-bottom-left::after {
+  top: 0;
+  left: 0;
+}
+.ribbon-bottom-left span {
+  right: -25px;
+  bottom: 30px;
+  transform: rotate(225deg);
+}
+
+/* bottom right*/
+.ribbon-bottom-right {
+  bottom: -10px;
+  right: -10px;
+}
+.ribbon-bottom-right::before,
+.ribbon-bottom-right::after {
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+}
+.ribbon-bottom-right::before {
+  bottom: 0;
+  left: 0;
+}
+.ribbon-bottom-right::after {
+  top: 0;
+  right: 0;
+}
+.ribbon-bottom-right span {
+  left: -25px;
+  bottom: 30px;
+  transform: rotate(-225deg);
+}
