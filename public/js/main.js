@@ -36,11 +36,11 @@ function userinfoUpdate () {
   if (randnum < 0.7) {
     document.getElementById("userinfo").innerHTML = `
       <p style="font-size: 1rem">2020.08.13 ~ 2020.08.20</p>
-      <p style="font-size: 2.2rem">&#x1F389; 당첨확률 31.5%</p>
+      <p style="font-size: 2.2rem">당첨확률 31.5%</p>
       <p style="font-size: 1.3rem">
-      &#x1F44F;&#x1F3FB; 손을 N번 씻었어요.<br/>
-      &#x1F4B0; 돈을 N원 예치해놓았어요.
-             </p>
+      - 손을 N번 씻었어요.<br/>
+      - 돈을 N원 예치해놓았어요.
+      </p>
     `;
   }
   else {
@@ -48,7 +48,7 @@ function userinfoUpdate () {
     startConfetti();
     document.getElementById("userinfo").innerHTML = `
       <p style="font-size: 1rem">2020.08.13 ~ 2020.08.20</p>
-      <p style="font-size: 2.2rem">&#x1F389; Congratulations!</p>
+      <p style="font-size: 2.2rem">Congratulations!</p>
     `;
   }
 }
