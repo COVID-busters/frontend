@@ -1,6 +1,6 @@
 window.onload = function() {
 	// Retrieved from https://inorganik.github.io/countUp.js/
-	var countUp = new CountUp('countup', 0, 36215);
+	var countUp = new CountUp('countup', 0, 936215);
 	countUp.start();
 
 	// Retrieved from https://mcatcher.github.io/2018/01/24/dday.html
