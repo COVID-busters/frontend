@@ -107,11 +107,12 @@ html, body {
   height: 150px;
   overflow: hidden;
   position: absolute;
+  z-index: 2;
 }
 .ribbon::before,
 .ribbon::after {
   position: absolute;
-  z-index: -1;
+  z-index: 2;
   content: '';
   display: block;
   border: 5px solid #dc7a74;
