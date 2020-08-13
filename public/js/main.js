@@ -23,4 +23,32 @@ window.onload = function() {
 	    document.getElementById("dday").innerHTML = "다음 추첨까지 " + d + "일 " + h + "시간 " + m + "분 " + s + "초";
 	  }
 	}
+
+        // Event handler for modal beforehide
+        UIkit.util.on('#modal-userinfo', 'beforehide', (e) => {
+          stopConfetti();
+        })
+}
+
+// Userinfo modal (random)
+function userinfoUpdate () {
+  let randnum = Math.random();
+  if (randnum < 0.7) {
+    document.getElementById("userinfo").innerHTML = `
+      <p style="font-size: 1rem">2020.08.13 ~ 2020.08.20</p>
+      <p style="font-size: 2.2rem">&#x1F389; 당첨확률 31.5%</p>
+      <p style="font-size: 1.3rem">
+      &#x1F44F;&#x1F3FB; 손을 N번 씻었어요.<br/>
+      &#x1F4B0; 돈을 N원 예치해놓았어요.
+             </p>
+    `;
+  }
+  else {
+    // Congrats
+    startConfetti();
+    document.getElementById("userinfo").innerHTML = `
+      <p style="font-size: 1rem">2020.08.13 ~ 2020.08.20</p>
+      <p style="font-size: 2.2rem">&#x1F389; Congratulations!</p>
+    `;
+  }
 }
