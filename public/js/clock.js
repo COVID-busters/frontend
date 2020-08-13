@@ -19,7 +19,7 @@ const COLOR_CODES = {
   }
 };
 
-const TIME_LIMIT = 30;
+const TIME_LIMIT = 5;
 let timePassed = 0;
 let timeLeft = TIME_LIMIT;
 let timerInterval = null;
@@ -48,7 +48,7 @@ function initialize() {
       ></path>
     </g>
   </svg>
-  <span id="base-timer-label" class="base-timer__label">${formatTime(
+  <div id="base-timer-label" class="base-timer__label">${formatTime(
     timeLeft
   )}</span>
 </div>
@@ -56,6 +56,7 @@ function initialize() {
 }
 
 function onTimesUp() {
+  document.getElementById("base-timer-label").innerHTML = "손씻기 완료!"
   clearInterval(timerInterval);
 }
 
