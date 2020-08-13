@@ -44,10 +44,19 @@
 	  <div style="display:inline-block;">원</div>
 	</div>
 	<div class="textbox" style="margin-top:100px">
-	  <button class="uk-button uk-button-primary uk-border-rounded uk-text-large">참여하기</button>
+	  <button id="count-button" class="uk-button uk-button-primary uk-border-rounded uk-text-large" uk-toggle="target: #modal-counter" onclick="startTimer()">참여하기</button>
 	</div>
+      </div>
+
+      <!-- modal-counter -->
+      <div id="modal-counter" uk-modal>
+        <div class="uk-text-center uk-modal-dialog uk-modal-body" style="background: transparent; width: 360px;">
+	  <div class="uk-width-1-1 uk-text-center" id="clock">
+          </div>
+        </div>
       </div>
     </body>
     <script src="js/countUp.js" defer></script>
+    <script src="js/clock.js" defer></script>
     <script src="js/main.js" defer></script>
 </html>
