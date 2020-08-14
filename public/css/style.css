@@ -1,4 +1,6 @@
 /*
+ * Used font on this website
+ * font-family: 'Jua', sans-serif;
  * font-family: 'Nanum Gothic', sans-serif;
  */
 * {
@@ -6,8 +8,6 @@
   font-weight: 400;
 }
 
-/* TODO: 모바일 웹에서 oveflow:hidden 해도 스크롤바 생기는 이슈*/
-/* REF: https://stackoverflow.com/questions/14270084/overflow-xhidden-doesnt-prevent-content-from-overflowing-in-mobile-browsers */
 html, body {
   overflow: hidden;
   width: 100%;
