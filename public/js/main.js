@@ -38,8 +38,8 @@ function userinfoUpdate () {
       <p style="font-size: 1rem">2020.08.13 ~ 2020.08.20</p>
       <p style="font-size: 2.2rem">당첨확률 31.5%</p>
       <p style="font-size: 1.3rem">
-      - 손을 N번 씻었어요.<br/>
-      - 돈을 N원 예치해놓았어요.
+      - 손을 3번 씻었어요.<br/>
+      - 돈을 20,000원 예치해놓았어요.
       </p>
     `;
   }
