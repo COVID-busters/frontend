@@ -7,7 +7,7 @@ const COINBASE = '0xc4422d1C18E9Ead8A9bB98Eb0d8bB9dbdf2811D7';
 
 function getUserInfo(useraddr) {
   var querydata = '{"functionName": "getUserInfo"' + ', "userAddr": "' + useraddr + '"}';
-  console.log("querydata = ", querydata);
+  //console.log("querydata = ", querydata);
   
   return $.ajax({
       url: USER_SERVER,
@@ -20,7 +20,7 @@ function getUserInfo(useraddr) {
 
 function addWashCount(useraddr, amount) {
   var querydata = '{"functionName": "addWashCount"' + ', "userAddr": "' + useraddr + '", "amount": ' + amount + '}';
-  console.log("querydata = ", querydata);
+  //console.log("querydata = ", querydata);
   
   return $.ajax({
       url: USER_SERVER,
@@ -33,7 +33,33 @@ function addWashCount(useraddr, amount) {
 
 function getTotalDeposit() {
   var querydata = '{"functionName": "getTotalDeposit"}';
-  console.log("querydata = ", querydata);
+  //console.log("querydata = ", querydata);
+  
+  return $.ajax({
+      url: USER_SERVER,
+      type: 'POST',
+      contentType: 'application/json',
+      processData: false,
+      data: querydata
+  });
+}
+
+function getUserCount() {
+  var querydata = '{"functionName": "getUserCount"}';
+  //console.log("querydata = ", querydata);
+  
+  return $.ajax({
+      url: USER_SERVER,
+      type: 'POST',
+      contentType: 'application/json',
+      processData: false,
+      data: querydata
+  });
+}
+
+function getLottoEpoch() {
+  var querydata = '{"functionName": "getLottoEpoch"}';
+  //console.log("querydata = ", querydata);
   
   return $.ajax({
       url: USER_SERVER,
@@ -46,7 +72,7 @@ function getTotalDeposit() {
 
 function getWinningProbability(useraddr) {
   var querydata = '{"functionName": "getWinningProbability"' + ', "userAddr": "' + useraddr + '"}';
-  console.log("querydata = ", querydata);
+  //console.log("querydata = ", querydata);
   
   return $.ajax({
       url: USER_SERVER,
@@ -59,7 +85,7 @@ function getWinningProbability(useraddr) {
 
 function addDeposit(useraddr, amount) {
   var querydata = '{"functionName": "addDeposit"' + ', "userAddr": "' + useraddr + '", "amount": ' + amount + '}';
-  console.log("querydata = ", querydata);
+  //console.log("querydata = ", querydata);
   
   return $.ajax({
       url: USER_SERVER,
@@ -72,7 +98,7 @@ function addDeposit(useraddr, amount) {
 
 function withdrawDeposit(useraddr, amount) {
   var querydata = '{"functionName": "withdrawDeposit"' + ', "userAddr": "' + useraddr + '", "amount": ' + amount + '}';
-  console.log("querydata = ", querydata);
+  //console.log("querydata = ", querydata);
   
   return $.ajax({
       url: USER_SERVER,
@@ -85,7 +111,7 @@ function withdrawDeposit(useraddr, amount) {
 
 function getRoundNumber() {
   var querydata = '{"functionName": "getRoundNumber"}';
-  console.log("querydata = ", querydata);
+  //console.log("querydata = ", querydata);
   
   return $.ajax({
       url: USER_SERVER,
@@ -98,7 +124,7 @@ function getRoundNumber() {
 
 function selectWinner() {
   var querydata = '{"functionName": "selectWinner"}';
-  console.log("querydata = ", querydata);
+  //console.log("querydata = ", querydata);
   
   return $.ajax({
       url: USER_SERVER,
@@ -111,7 +137,7 @@ function selectWinner() {
 
 function getWinnersInfo(roundnum) {
   var querydata = '{"functionName": "getWinnersInfo", "roundNumber": ' + roundnum + '}';
-  console.log("querydata = ", querydata);
+  //console.log("querydata = ", querydata);
   
   return $.ajax({
       url: USER_SERVER,
@@ -128,7 +154,7 @@ function getWinnersInfo(roundnum) {
 
 function getBlockNumber() {
   var querydata = '{"functionName": "getBlockNumber"}';
-  console.log("querydata = ", querydata);
+  //console.log("querydata = ", querydata);
   
   return $.ajax({
       url: CHAIN_SERVER,
@@ -141,7 +167,7 @@ function getBlockNumber() {
 
 function startMining() {
   var querydata = '{"functionName": "startMining"}';
-  console.log("querydata = ", querydata);
+  //console.log("querydata = ", querydata);
   
   return $.ajax({
       url: CHAIN_SERVER,
@@ -154,7 +180,7 @@ function startMining() {
 
 function stopMining() {
   var querydata = '{"functionName": "stopMining"}';
-  console.log("querydata = ", querydata);
+  //console.log("querydata = ", querydata);
   
   return $.ajax({
       url: CHAIN_SERVER,

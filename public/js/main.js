@@ -1,3 +1,7 @@
+let dday = 0;
+let day_diff = 1;
+let timerOn = false;
+
 window.onload = function() {
 	// Retrieved from https://inorganik.github.io/countUp.js/
 	var countUp = new CountUp('countup', 0, 0);
@@ -6,45 +10,62 @@ window.onload = function() {
         var depositcounter = setInterval (depositUpdate, 5000);
 	function depositUpdate () {
 	  getTotalDeposit().done(function(msg) {
-            console.log("request result : ", msg);
+            //console.log("request result : ", msg);
             deposit = msg["totalDeposit"];
 	    countUp.update(deposit);
           });
 	}
 
 	// Retrieved from https://mcatcher.github.io/2018/01/24/dday.html
-	var dday = new Date("August 19, 2020 00:00:00").getTime(); // D-Day
-	ddayUpdate(); // Initialize
-	var ddaytimer = setInterval (ddayUpdate, 1000);
-	function ddayUpdate () {
-	  var today = new Date(); // current time
-	  today = today.getTime(); // milliseconds
-	  var day_diff = dday - today;
-
-	  var d = Math.floor(day_diff / (1000 * 60 * 60 * 24));
-	  var h = Math.floor((day_diff / (1000 * 60 * 60)) % 24);
-	  var m = Math.floor((day_diff / (1000 * 60)) % 60);
-	  var s = Math.floor((day_diff / 1000) % 60);
-
-	  if (day_diff <= 0) {
-	    document.getElementById("dday").innerHTML = "D-day";
-	  } else {
-	    document.getElementById("dday").innerHTML = "다음 추첨까지 " + d + "일 " + h + "시간 " + m + "분 " + s + "초";
-	  }
-	}
+	ddayUpdate ();
 
         // Event handler for modal beforehide
         UIkit.util.on('#modal-userinfo', 'beforehide', (e) => {
           stopConfetti();
         })
+}
 
+function ddayUpdate () {
+  let blockNumber = 0;
+  let lottoEpoch = 0;
+  getBlockNumber().done(function(msg) {
+    blockNumber = msg["blockNumber"];
+    getLottoEpoch().done(function(msg) {
+      lottoEpoch = msg["lottoEpoch"];
+      // 받아온 blockNumber, lottoEpoch 이용해 target dday 설정
+      let current = new Date();
+      let blockdiff = blockNumber % (lottoEpoch + 1);
+      if (blockdiff > 0) blockdiff = lottoEpoch + 1 - blockdiff;
+      dday = current.getTime() + blockdiff*60000;
+      remainTimeUpdate(); // Initialize
+      if (!timerOn) {
+        var ddaytimer = setInterval (remainTimeUpdate, 1000);
+        timerOn = true;
+      }
+    });
+  });
+}
+
+function remainTimeUpdate () {
+  var today = new Date(); // current time
+  today = today.getTime(); // milliseconds
+  day_diff = dday - today;
+  var d = Math.floor(day_diff / (1000 * 60 * 60 * 24));
+  var h = Math.floor((day_diff / (1000 * 60 * 60)) % 24);
+  var m = Math.floor((day_diff / (1000 * 60)) % 60);
+  var s = Math.floor((day_diff / 1000) % 60);
+  if (day_diff <= 0) {
+    document.getElementById("dday").innerHTML = "추첨이 진행됩니다! 결과를 확인해주세요.";
+  } else {
+    document.getElementById("dday").innerHTML = "다음 추첨까지 약 " + d + "일 " + h + "시간 " + m + "분 " + s + "초";
+  }
 }
 
 // Deposit Handler
 function addDepositHandler () {
   let amount = document.getElementById("depositInput").value;
   addDeposit(COINBASE, amount).done(function(msg) {
-    console.log("request result : ", msg);
+    //console.log("request result : ", msg);
     result = msg["result"];
     if (result == "success") {
       alert("SUCCESS!");
@@ -58,7 +79,7 @@ function addDepositHandler () {
 function withdrawDepositHandler () {
   let amount = document.getElementById("depositInput").value;
   withdrawDeposit(COINBASE, amount).done(function(msg) {
-    console.log("request result : ", msg);
+    //console.log("request result : ", msg);
     result = msg["result"];
     if (result == "success") {
       alert("SUCCESS!");
@@ -69,23 +90,14 @@ function withdrawDepositHandler () {
   });
 }
 
-// Userinfo modal (random)
+// Userinfo modal
 function userinfoUpdate () {
   document.getElementById("userinfo").innerHTML = `<p style="font-size: 2.2rem">Loading . . .</p>`;
-  let randnum = Math.random();
-  if (randnum < 0.7) {
+  if (day_diff > 0) {
     updateUserInfo();
   }
   else {
     selectWinnerHandler();
-    /*
-    // Congrats
-    startConfetti();
-    document.getElementById("userinfo").innerHTML = `
-      <p style="font-size: 1rem">2020.08.13 ~ 2020.08.20</p>
-      <p style="font-size: 2.2rem">Congratulations!</p>
-    `;
-    */
   }
 }
 
@@ -93,7 +105,7 @@ function updateUserInfo() {
   getRoundNumber().done(function(msg) {
   let roundnum = msg["roundNumber"];
   getUserInfo(COINBASE).done(function(msg) {
-    console.log("request result : ", msg);
+    //console.log("request result : ", msg);
     let balance = msg["balance"];
     let washCount = msg["washCount"];
     getWinningProbability(COINBASE).done(function(msg) {
@@ -136,6 +148,8 @@ function selectWinnerHandler() {
             - 저축금당첨자 ` + washCountWinner + `
             </p>
           `;
+	  // 다시 현재 블록과 에폭을 받아와서 dday 재설정
+	  ddayUpdate();
 	});
       });
   });
