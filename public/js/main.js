@@ -5,14 +5,23 @@ let timerOn = false;
 window.onload = function() {
   // Retrieved from https://inorganik.github.io/countUp.js/
   var countUp = new CountUp('countup', 0, 0);
+  var countUser = new CountUp('countuser', 0, 0);
   depositUpdate();
+  userUpdate();
   countUp.start();
+  countUser.start();
   var depositcounter = setInterval (depositUpdate, 5000);
+  var usercounter = setInterval (userUpdate, 5000);
   function depositUpdate () {
     getTotalDeposit().done(function(msg) {
-    //console.log("request result : ", msg);
     deposit = msg["totalDeposit"];
     countUp.update(deposit);
+    });
+  }
+  function userUpdate () {
+    getUserCount().done(function(msg) {
+    usernum = msg["userCount"];
+    countUser.update(usernum);
     });
   }
 
@@ -27,7 +36,7 @@ window.onload = function() {
     stopTimer();
   })
 
-  document.getElementById("useraddr_label").innerHTML = COINBASE;
+  document.getElementById("useraddr_label").innerHTML = COINBASE.substring(0, 15) + "...";
 }
 
 function ddayUpdate () {

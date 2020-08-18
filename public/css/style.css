@@ -18,6 +18,12 @@ html, body {
     display: none;
 }
 
+@media (max-height: 730px) {
+  .usercountelem {
+    display: none !important;
+  }
+}
+
 .textbox {
   width: 100%;
   z-index: 1;
