@@ -26,6 +26,8 @@ window.onload = function() {
   UIkit.util.on('#modal-counter', 'beforehide', (e) => {
     stopTimer();
   })
+
+  document.getElementById("useraddr_label").innerHTML = COINBASE;
 }
 
 function ddayUpdate () {
@@ -116,7 +118,7 @@ function updateUserInfo() {
       let depositWinProb = msg["depositWinProb"];
       document.getElementById("userinfo").innerHTML = `
         <p style="font-size: 1rem">Round #` + roundnum + `</p>
-        <p style="font-size: 2.2rem">손씻기당첨확률 ` + washCountWinProb + `%<br/>저축금당첨확률 ` + depositWinProb + `%</p>
+        <p style="font-size: 2.2rem">손씻기당첨확률 ` + Math.round(washCountWinProb) + `%<br/>저축금당첨확률 ` + Math.round(depositWinProb) + `%</p>
         <p style="font-size: 1.3rem">
         - 손을 ` + washCount + `번 씻었어요.<br/>
         - 돈을 ` + balance + `원 예치해놓았어요.
@@ -141,16 +143,28 @@ function selectWinnerHandler() {
 	  let washCountWinner = msg["washCountWinner"];
 	  let winningPrizeAmount = msg["winningPrizeAmount"];
 	  // TODO : Winner 가 이 account 인지를 체크한 뒤 Congrats
-          // Congrats
-          startConfetti();
-          document.getElementById("userinfo").innerHTML = `
-            <p style="font-size: 1rem">Round #` + roundnum + `</p>
-            <p style="font-size: 2.2rem">Congratulations!<br/>당첨금액 ` + winningPrizeAmount/2 + `원</p>
-            <p style="font-size: 1.0rem">
-            - 손씻기당첨자 ` + depositWinner + `<br/>
-            - 저축금당첨자 ` + washCountWinner + `
-            </p>
-          `;
+	  if (COINBASE == depositWinner || COINBASE == washCountWinner) {
+            // Congrats
+            startConfetti();
+            document.getElementById("userinfo").innerHTML = `
+              <p style="font-size: 1rem">Round #` + roundnum + `</p>
+              <p style="font-size: 2.2rem">Congratulations!<br/>당첨금액 ` + winningPrizeAmount/2 + `원</p>
+              <p style="font-size: 1.0rem">
+              - 손씻기당첨자 ` + depositWinner + `<br/>
+              - 저축금당첨자 ` + washCountWinner + `
+              </p>
+            `;
+	  }
+	  else {
+            document.getElementById("userinfo").innerHTML = `
+              <p style="font-size: 1rem">Round #` + roundnum + `</p>
+              <p style="font-size: 2.2rem">다음기회에 ㅠ_ㅠ<br/>당첨금액 ` + winningPrizeAmount/2 + `원</p>
+              <p style="font-size: 1.0rem">
+              - 손씻기당첨자 ` + depositWinner + `<br/>
+              - 저축금당첨자 ` + washCountWinner + `
+              </p>
+            `;
+	  }
 	  // 다시 현재 블록과 에폭을 받아와서 dday 재설정
 	  ddayUpdate();
 	});
