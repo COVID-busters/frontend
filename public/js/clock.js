@@ -58,6 +58,10 @@ function initialize() {
 function onTimesUp() {
   document.getElementById("base-timer-label").innerHTML = "손씻기 완료!"
   clearInterval(timerInterval);
+  // Call `addWashCount` transaction
+  addWashCount(COINBASE, 1).done(function(msg) {
+    console.log("request result : ", msg);
+  });
 }
 
 function startTimer() {
