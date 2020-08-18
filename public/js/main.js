@@ -3,26 +3,26 @@ let day_diff = 1;
 let timerOn = false;
 
 window.onload = function() {
-	// Retrieved from https://inorganik.github.io/countUp.js/
-	var countUp = new CountUp('countup', 0, 0);
-	depositUpdate();
-	countUp.start();
-        var depositcounter = setInterval (depositUpdate, 5000);
-	function depositUpdate () {
-	  getTotalDeposit().done(function(msg) {
-            //console.log("request result : ", msg);
-            deposit = msg["totalDeposit"];
-	    countUp.update(deposit);
-          });
-	}
+  // Retrieved from https://inorganik.github.io/countUp.js/
+  var countUp = new CountUp('countup', 0, 0);
+  depositUpdate();
+  countUp.start();
+  var depositcounter = setInterval (depositUpdate, 5000);
+  function depositUpdate () {
+    getTotalDeposit().done(function(msg) {
+    //console.log("request result : ", msg);
+    deposit = msg["totalDeposit"];
+    countUp.update(deposit);
+    });
+  }
 
-	// Retrieved from https://mcatcher.github.io/2018/01/24/dday.html
-	ddayUpdate ();
+  // Retrieved from https://mcatcher.github.io/2018/01/24/dday.html
+  ddayUpdate ();
 
-        // Event handler for modal beforehide
-        UIkit.util.on('#modal-userinfo', 'beforehide', (e) => {
-          stopConfetti();
-        })
+  // Event handler for modal beforehide
+  UIkit.util.on('#modal-userinfo', 'beforehide', (e) => {
+    stopConfetti();
+  })
 }
 
 function ddayUpdate () {
