@@ -23,6 +23,9 @@ window.onload = function() {
   UIkit.util.on('#modal-userinfo', 'beforehide', (e) => {
     stopConfetti();
   })
+  UIkit.util.on('#modal-counter', 'beforehide', (e) => {
+    stopTimer();
+  })
 }
 
 function ddayUpdate () {

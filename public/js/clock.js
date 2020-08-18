@@ -60,8 +60,12 @@ function onTimesUp() {
   clearInterval(timerInterval);
   // Call `addWashCount` transaction
   addWashCount(COINBASE, 1).done(function(msg) {
-    console.log("request result : ", msg);
+    //console.log("msg", msg);
   });
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
 }
 
 function startTimer() {
